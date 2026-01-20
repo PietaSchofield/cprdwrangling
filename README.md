@@ -38,6 +38,28 @@ Dr Pietà-Georgina ‘Georgie’ Schofield
   - [Take Home Message](#take-home-message)
 - [Thank You (pietas@liverpool.ac.uk)](#thank-you-pietasliverpoolacuk)
 
+    Loading required package: tidyverse
+
+    ── Attaching core tidyverse packages ────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+    ✔ dplyr     1.1.4     ✔ readr     2.1.6
+    ✔ forcats   1.0.0     ✔ stringr   1.6.0
+    ✔ ggplot2   4.0.1     ✔ tibble    3.3.1
+    ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+    ✔ purrr     1.2.1     
+    ── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+    ✖ dplyr::filter() masks stats::filter()
+    ✖ dplyr::lag()    masks stats::lag()
+    ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+    Loading required package: dbplyr
+
+
+    Attaching package: 'dbplyr'
+
+
+    The following objects are masked from 'package:dplyr':
+
+        ident, sql
+
 # Motivation
 
 ## CPRD Aurum Data
@@ -224,18 +246,18 @@ DBI::dbDisconnect(dbcon)
 
 </div>
 
-| patid | proposed_group | index_date | yob | gender | regstartdate | index_year | index_age |
-|:---|:---|:---|---:|---:|:---|---:|---:|
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2024-02-26 | 1957 | 2 | 1999-04-07 | 2024 | 67 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2019-03-13 | 1952 | 2 | 1953-11-03 | 2019 | 67 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2015-12-30 | 1935 | 2 | 1984-04-30 | 2015 | 80 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2016-01-12 | 1931 | 1 | 2006-11-17 | 2016 | 85 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2018-09-24 | 1958 | 1 | 1996-10-16 | 2018 | 60 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2014-01-21 | 1974 | 1 | 2009-01-07 | 2014 | 40 |
-| \*\*\*\*\*\*\*\* | Alzheimera??s | 2023-08-17 | 1939 | 2 | 1964-09-25 | 2023 | 84 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2019-11-29 | 1936 | 1 | 1955-10-29 | 2019 | 83 |
-| \*\*\*\*\*\*\*\* | Vascular | 2018-05-04 | 1940 | 2 | 1983-03-31 | 2018 | 78 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2022-09-20 | 1939 | 1 | 1983-03-31 | 2022 | 83 |
+| patid | proposed_group | index_date | yob | gender | regstartdate | index_year | index_age | regstartdat |
+|:---|:---|:---|---:|---:|:---|---:|---:|:---|
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | —- | 1951 | 1 | 1997-02-21 | 2016 | 65 | —- |
+| \*\*\*\*\*\*\*\* | Alzheimera??s | —- | 1937 | 2 | 1986-04-14 | 2016 | 79 | —- |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | —- | 1936 | 1 | 2000-05-09 | 2019 | 83 | —- |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | —- | 1966 | 2 | 1997-07-11 | 2019 | 53 | —- |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | —- | 1977 | 2 | 2000-05-09 | 2017 | 40 | —- |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | —- | 1949 | 1 | 1997-02-14 | 2017 | 68 | —- |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | —- | 1956 | 1 | 1986-04-14 | 2020 | 64 | —- |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | —- | 1968 | 2 | 1986-04-14 | 2015 | 47 | —- |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | —- | 1962 | 2 | 1992-04-14 | 2019 | 57 | —- |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | —- | 1951 | 1 | 2000-05-19 | 2022 | 71 | —- |
 
 ## `ggplot2`
 

@@ -18,7 +18,7 @@ require(dbplyr)
 dbname <- file.path(.locData,"duckdb","demrisk.duckdb")
 #
 # NB Horrible kludge but set this TRUE if rendering ioslides and FALSE if rendering github_document
-tohtml <- TRUE
+tohtml <- FALSE
 ```
 
 # Motivation
@@ -184,7 +184,9 @@ DBI::dbDisconnect(dbcon)
 </div>
 
 ```{r ta-dah_2_md_R, comment=NA, echo=F,eval=!tohtml}
-  dementia_trends |> head(10) |> mutate(patid="********") |> knitr::kable(format="pipe")
+  dementia_trends |> head(10) |> mutate(patid="********",
+                                        index_date="----",
+                                        regstartdat="----") |> knitr::kable(format="pipe")
 ```
 
 ## `ggplot2`
@@ -338,17 +340,23 @@ remotes::install_github("PietaSchofield/rtrhd")
 # Thank You (pietas@liverpool.ac.uk)
 
 ```{r build-it_R, comment=NA,eval=F,echo=F}
+#
+# Render for slides
+#
 outfile <- file.path("/srv","http","uol","tutorials","cprdwrangling.html")
-readme <- file.path(Sys.getenv("HOME"),"GitLab","cprdwrangling","README.md")
 rmarkdown::render(
  input=file.path(Sys.getenv("HOME"),"GitLab","cprdwrangling","index.Rmd"),
  output_file=outfile
  )
+system2("xdg-open",args=outfile,wait=FALSE)
+#
+# Render for GitHub
+#
+readme <- file.path(Sys.getenv("HOME"),"GitLab","cprdwrangling","README.md")
 rmarkdown::render(
  input=file.path(Sys.getenv("HOME"),"GitLab","cprdwrangling","index.Rmd"),
  output_format="github_document",
  output_file=readme
  )
-system2("xdg-open",args=outfile,wait=FALSE)
 system2("firefox",args=readme,wait=FALSE)
 ```
