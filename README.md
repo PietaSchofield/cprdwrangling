@@ -131,8 +131,6 @@ rtrhd::load_table(dbf=dbname,dataset=coi,tab_name="coi_emis_dementia")
 
 <div style="font-size: 0.5em;">
 
-    PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
-
 ![](/home/pietas/GitLab/cprdwrangling/README_files/figure-gfm/the-db_R-1.png)<!-- -->
 
 </div>

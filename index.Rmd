@@ -126,7 +126,11 @@ rtrhd::load_table(dbf=dbname,dataset=coi,tab_name="coi_emis_dementia")
 
 <div style="font-size: 0.5em;">
 ```{r the-db_R, comment=NA,echo=F}
-rtrhd::list_db(dbname) |> plibr::display_data(buttons=F)
+if(knitr::is_html_output()){
+  rtrhd::list_db(dbname) |> plibr::display_data(buttons=F)
+}else{
+  rtrhd::list_db(dbname) |> knitr::kable()
+}
 ```
 </div>
 
@@ -170,7 +174,11 @@ DBI::dbDisconnect(dbcon)
 
 <div style="font-size: 0.5em;">
 ```{r ta-dah_2_R, comment=NA, echo=F}
-dementia_trends |> head() |> plibr::display_data(buttons=F)
+if(knitr::is_html_output()){
+  dementia_trends |> head() |> mutate(patid="********") |> plibr::display_data(buttons=F)
+}else{
+  dementia_trends |> head() |> mutate(patid="********") |> knitr::kable()
+}
 ```
 </div>
 
@@ -310,7 +318,7 @@ remotes::install_github("PietaSchofield/rtrhd")
 
 ```{r build-it_R, comment=NA,eval=F,echo=F}
 outfile <- file.path("/srv","http","uol","tutorials","cprdwrangling.html")
-readme <- file.path(Sys.getenv("HOME","GitLab","cprdwrangling","README.md")
+readme <- file.path(Sys.getenv("HOME"),"GitLab","cprdwrangling","README.md")
 rmarkdown::render(
  input=file.path(Sys.getenv("HOME"),"GitLab","cprdwrangling","index.Rmd"),
  output_file=outfile
