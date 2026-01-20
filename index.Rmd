@@ -18,7 +18,7 @@ require(dbplyr)
 dbname <- file.path(.locData,"duckdb","demrisk.duckdb")
 #
 # NB Horrible kludge but set this TRUE if rendering ioslides and FALSE if rendering github_document
-tohtml <- FALSE
+tohtml <- TRUE
 ```
 
 # Motivation
