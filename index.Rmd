@@ -310,9 +310,15 @@ remotes::install_github("PietaSchofield/rtrhd")
 
 ```{r build-it_R, comment=NA,eval=F,echo=F}
 outfile <- file.path("/srv","http","uol","tutorials","cprdwrangling.html")
+readme <- file.path(Sys.getenv("HOME","GitLab","cprdwrangling","README.md")
 rmarkdown::render(
  input=file.path(Sys.getenv("HOME"),"GitLab","cprdwrangling","index.Rmd"),
  output_file=outfile
  )
 system2("xdg-open",args=outfile,wait=FALSE)
+rmarkdown::render(
+ input=file.path(Sys.getenv("HOME"),"GitLab","cprdwrangling","index.Rmd"),
+ output_format="github_document",
+ output_file=readme
+ )
 ```
