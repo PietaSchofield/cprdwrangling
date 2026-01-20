@@ -68,7 +68,8 @@ tohtml <- FALSE
 
 - Well I have done that and you have your 9 zipped files (13GB)
 - Copy them from CPRDGeneralinfo drive to a University asset you have read/write access to
-    - options university desktop / laptop / active data storage network drive (preferable)
+   - options university desktop / laptop / active data storage network drive (preferable)
+   - __do not cope to unencrypted non_password protected devices (eg. penstick, personal laptops)__
 - Unzip the compressed files into the 93 tab delimited text files (82GB)
 
 ## Load

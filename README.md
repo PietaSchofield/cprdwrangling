@@ -94,6 +94,8 @@ Dr Pietà-Georgina ‘Georgie’ Schofield
   read/write access to
   - options university desktop / laptop / active data storage network
     drive (preferable)
+  - **do not cope to unencrypted non_password protected devices (eg.
+    penstick, personal laptops)**
 - Unzip the compressed files into the 93 tab delimited text files (82GB)
 
 ## Load
@@ -226,16 +228,16 @@ DBI::dbDisconnect(dbcon)
 
 | patid            | proposed_group             |  yob | gender | index_year | index_age |
 |:-----------------|:---------------------------|-----:|-------:|-----------:|----------:|
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1930 |      2 |       2018 |        88 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1924 |      2 |       2017 |        93 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1952 |      2 |       2023 |        71 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1932 |      2 |       2023 |        91 |
-| \*\*\*\*\*\*\*\* | Alzheimera??s              | 1934 |      1 |       2024 |        90 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1966 |      2 |       2024 |        58 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1951 |      1 |       2024 |        73 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1964 |      2 |       2024 |        60 |
-| \*\*\*\*\*\*\*\* | Parkinson-associated       | 1941 |      1 |       2024 |        83 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1968 |      2 |       2020 |        52 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1948 |      2 |       2014 |        66 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1943 |      1 |       2016 |        73 |
+| \*\*\*\*\*\*\*\* | Vascular                   | 1933 |      1 |       2019 |        86 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1940 |      2 |       2018 |        78 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1946 |      1 |       2017 |        71 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1941 |      1 |       2014 |        73 |
+| \*\*\*\*\*\*\*\* | Alzheimera??s              | 1936 |      1 |       2017 |        81 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1954 |      1 |       2018 |        64 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1948 |      2 |       2021 |        73 |
+| \*\*\*\*\*\*\*\* | Vascular                   | 1952 |      1 |       2024 |        72 |
 
 ## `ggplot2`
 
