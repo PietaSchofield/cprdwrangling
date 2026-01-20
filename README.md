@@ -222,16 +222,20 @@ DBI::dbDisconnect(dbcon)
 
 <div style="font-size: 0.5em;">
 
+</div>
+
 | patid | proposed_group | index_date | yob | gender | regstartdate | index_year | index_age |
 |:---|:---|:---|---:|---:|:---|---:|---:|
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2018-02-01 | 1930 | 2 | 2000-09-02 | 2018 | 88 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2017-11-07 | 1924 | 2 | 1999-10-01 | 2017 | 93 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2023-03-17 | 1952 | 2 | 2017-11-28 | 2023 | 71 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2023-01-12 | 1932 | 2 | 1999-09-24 | 2023 | 91 |
-| \*\*\*\*\*\*\*\* | Alzheimera??s | 2024-07-18 | 1934 | 1 | 2001-08-06 | 2024 | 90 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2024-09-04 | 1966 | 2 | 2000-12-19 | 2024 | 58 |
-
-</div>
+| \*\*\*\*\*\*\*\* | Vascular | 2018-01-01 | 1945 | 1 | 1993-05-01 | 2018 | 73 |
+| \*\*\*\*\*\*\*\* | Other/Check | 2017-01-16 | 1945 | 1 | 1997-04-22 | 2017 | 72 |
+| \*\*\*\*\*\*\*\* | Vascular | 2022-12-05 | 1944 | 2 | 2002-01-29 | 2022 | 78 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2022-06-30 | 1960 | 1 | 1998-06-24 | 2022 | 62 |
+| \*\*\*\*\*\*\*\* | Vascular | 2022-09-12 | 1940 | 2 | 2002-03-21 | 2022 | 82 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2014-01-21 | 1974 | 1 | 2009-01-07 | 2014 | 40 |
+| \*\*\*\*\*\*\*\* | Alzheimera??s | 2023-08-17 | 1939 | 2 | 1964-09-25 | 2023 | 84 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2019-11-29 | 1936 | 1 | 1955-10-29 | 2019 | 83 |
+| \*\*\*\*\*\*\*\* | Vascular | 2018-05-04 | 1940 | 2 | 1983-03-31 | 2018 | 78 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2022-09-20 | 1939 | 1 | 1983-03-31 | 2022 | 83 |
 
 ## `ggplot2`
 
@@ -254,10 +258,17 @@ dementia_trends_plot <- dementia_trends %>%
 ## Uh oh!
 
 ``` r
-print(dementia_trends_plot)
+tohtml
 ```
 
-<img src="/home/pietas/GitLab/cprdwrangling/README_files/figure-gfm/plotit_R-1.png" alt="" width="100%" />
+    ## [1] FALSE
+
+<figure>
+<img
+src="https://github.com/PietaSchofield/cprdwrangling/tree/main/README_files/figure-gfm/plotit-R.png"
+alt="Dementia trends plot" />
+<figcaption aria-hidden="true">Dementia trends plot</figcaption>
+</figure>
 
 # This is “Lazy Evaluation” </br></br>Spoiler Alert: chain `dbplyr` then collect()
 
@@ -327,13 +338,14 @@ DBI::dbDisconnect(dbcon)
 
 <div style="font-size: 0.8em;">
 
-``` r
-print(dementia_trends_plot)
-```
-
-<img src="/home/pietas/GitLab/cprdwrangling/README_files/figure-gfm/plotit_2_R-1.png" alt="" width="100%" />
-
 </div>
+
+<figure>
+<img
+src="https://github.com/PietaSchofield/cprdwrangling/tree/main/README_files/figure-gfm/plotit_2_R.png"
+alt="Dementia trends plot" />
+<figcaption aria-hidden="true">Dementia trends plot</figcaption>
+</figure>
 
 # Discussion
 

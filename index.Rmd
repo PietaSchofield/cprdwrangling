@@ -16,7 +16,7 @@ require(tidyverse)
 require(dbplyr)
 .locData <- file.path(Sys.getenv("HOME"),"Projects","demrfmr",".data")
 dbname <- file.path(.locData,"duckdb","demrisk.duckdb")
-tohtml <- knitr::is_html_output()
+tohtml <- FALSE
 ```
 
 # Motivation
@@ -128,12 +128,12 @@ rtrhd::load_table(dbf=dbname,dataset=coi,tab_name="coi_emis_dementia")
 ## The Database
 
 <div style="font-size: 0.5em;">
-```{r the-db_R, comment=NA,echo=F}
-if(!tohtml){
+```{r the-db_R, comment=NA,echo=F,eval=tohtml}
   rtrhd::list_db(dbname) |> plibr::display_data(buttons=F)
-}else{
-  rtrhd::list_db(dbname) |> knitr::kable(format="markdown")
-}
+```
+
+```{r the-db-md_R, comment=NA,echo=F,eval=!tohtml}
+  rtrhd::list_db(dbname) |> knitr::kable(format="pipe")
 ```
 </div>
 
@@ -176,14 +176,14 @@ DBI::dbDisconnect(dbcon)
 ## `tibble`
 
 <div style="font-size: 0.5em;">
-```{r ta-dah_2_R, comment=NA, echo=F}
-if(!tohtml){
-  dementia_trends |> head() |> mutate(patid="********") |> plibr::display_data(buttons=F)
-}else{
-  dementia_trends |> head() |> mutate(patid="********") |> knitr::kable()
-}
+```{r ta-dah_2_R, comment=NA, echo=F,eval=tohtml}
+  dementia_trends |> head(10) |> mutate(patid="********") |> plibr::display_data(buttons=F)
 ```
 </div>
+
+```{r ta-dah_2_md_R, comment=NA, echo=F,eval=!tohtml}
+  dementia_trends |> head(10) |> mutate(patid="********") |> knitr::kable(format="pipe")
+```
 
 ## `ggplot2`
 
@@ -203,7 +203,11 @@ dementia_trends_plot <- dementia_trends %>%
 
 ## Uh oh!
 
-```{r plotit_R, comment=NA, echo=tohtml, out.width="100%",warning=F,message=F}
+```{r db_1}
+tohtml
+```
+
+```{r plotit_R, comment=NA, eval=tohtml,echo=F, out.width="100%",warning=F,message=F}
 print(dementia_trends_plot)
 ```
 
@@ -286,7 +290,7 @@ dementia_trends_plot <- dementia_trends %>%
   theme_minimal()
 ```
 
-```{r plotit_2_R, comment=NA, echo=tohtml, out.width="100%",warning=F,message=F}
+```{r plotit_2_R, comment=NA, echo=FALSE, eval=tohtml, out.width="100%",warning=F,message=F}
 print(dementia_trends_plot)
 ```
 </div>
@@ -348,5 +352,5 @@ rmarkdown::render(
  output_file=readme
  )
 system2("xdg-open",args=outfile,wait=FALSE)
-system2("xdg-open",args=readme,wait=FALSE)
+system2("firefox",args=readme,wait=FALSE)
 ```
