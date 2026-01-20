@@ -184,9 +184,8 @@ DBI::dbDisconnect(dbcon)
 </div>
 
 ```{r ta-dah_2_md_R, comment=NA, echo=F,eval=!tohtml}
-  dementia_trends |> head(10) |> mutate(patid="********",
-                                        index_date="----",
-                                        regstartdat="----") |> knitr::kable(format="pipe")
+  dementia_trends |> head(10) |> select(-c(index_date,regstartdate)) |>
+    mutate(patid="********") |> knitr::kable(format="pipe")
 ```
 
 ## `ggplot2`
