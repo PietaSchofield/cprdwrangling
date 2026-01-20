@@ -226,16 +226,16 @@ DBI::dbDisconnect(dbcon)
 
 | patid | proposed_group | index_date | yob | gender | regstartdate | index_year | index_age |
 |:---|:---|:---|---:|---:|:---|---:|---:|
-| \*\*\*\*\*\*\*\* | Vascular | 2018-01-01 | 1945 | 1 | 1993-05-01 | 2018 | 73 |
-| \*\*\*\*\*\*\*\* | Other/Check | 2017-01-16 | 1945 | 1 | 1997-04-22 | 2017 | 72 |
-| \*\*\*\*\*\*\*\* | Vascular | 2022-12-05 | 1944 | 2 | 2002-01-29 | 2022 | 78 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2022-06-30 | 1960 | 1 | 1998-06-24 | 2022 | 62 |
-| \*\*\*\*\*\*\*\* | Vascular | 2022-09-12 | 1940 | 2 | 2002-03-21 | 2022 | 82 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2014-01-21 | 1974 | 1 | 2009-01-07 | 2014 | 40 |
-| \*\*\*\*\*\*\*\* | Alzheimera??s | 2023-08-17 | 1939 | 2 | 1964-09-25 | 2023 | 84 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2019-11-29 | 1936 | 1 | 1955-10-29 | 2019 | 83 |
-| \*\*\*\*\*\*\*\* | Vascular | 2018-05-04 | 1940 | 2 | 1983-03-31 | 2018 | 78 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2022-09-20 | 1939 | 1 | 1983-03-31 | 2022 | 83 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2019-02-06 | 1949 | 2 | 1993-05-05 | 2019 | 70 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2015-06-02 | 1933 | 1 | 1996-05-01 | 2015 | 82 |
+| \*\*\*\*\*\*\*\* | Alzheimera??s | 2025-06-13 | 1941 | 1 | 1999-10-01 | 2025 | 84 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2024-09-17 | 1964 | 2 | 1996-05-01 | 2024 | 60 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2020-07-23 | 1931 | 2 | 1994-04-16 | 2020 | 89 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2016-03-01 | 1950 | 1 | 2003-03-19 | 2016 | 66 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2014-10-09 | 1945 | 2 | 2008-09-10 | 2014 | 69 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2021-05-24 | 1960 | 2 | 2008-07-03 | 2021 | 61 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2015-07-07 | 1926 | 2 | 1991-09-04 | 2015 | 89 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2016-11-23 | 1949 | 2 | 1991-09-04 | 2016 | 67 |
 
 ## `ggplot2`
 
@@ -265,7 +265,7 @@ tohtml
 
 <figure>
 <img
-src="https://github.com/PietaSchofield/cprdwrangling/tree/main/README_files/figure-gfm/plotit-R.png"
+src="https://github.com/PietaSchofield/cprdwrangling/tree/main/README_files/figure-gfm/plotit_R-1.png"
 alt="Dementia trends plot" />
 <figcaption aria-hidden="true">Dementia trends plot</figcaption>
 </figure>
@@ -342,7 +342,7 @@ DBI::dbDisconnect(dbcon)
 
 <figure>
 <img
-src="https://github.com/PietaSchofield/cprdwrangling/tree/main/README_files/figure-gfm/plotit_2_R.png"
+src="https://github.com/PietaSchofield/cprdwrangling/tree/main/README_files/figure-gfm/plotit_2_R-1.png"
 alt="Dementia trends plot" />
 <figcaption aria-hidden="true">Dementia trends plot</figcaption>
 </figure>

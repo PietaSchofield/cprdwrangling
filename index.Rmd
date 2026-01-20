@@ -16,6 +16,8 @@ require(tidyverse)
 require(dbplyr)
 .locData <- file.path(Sys.getenv("HOME"),"Projects","demrfmr",".data")
 dbname <- file.path(.locData,"duckdb","demrisk.duckdb")
+#
+# NB Horrible kludge but set this TRUE if rendering ioslides and FALSE if rendering github_document
 tohtml <- FALSE
 ```
 
@@ -213,7 +215,7 @@ print(dementia_trends_plot)
 
 ```{r show-plot-markdown, echo=FALSE, eval=!tohtml, results='asis'}
 figpath <- "https://github.com/PietaSchofield/cprdwrangling/tree/main/README_files/figure-gfm"
-figfile <- file.path(figpath,"plotit-R.png")
+figfile <- file.path(figpath,"plotit_R-1.png")
 cat(paste0("\n\n![Dementia trends plot](",figfile,")\n\n"))
 ```
 
@@ -298,7 +300,7 @@ print(dementia_trends_plot)
 
 ```{r show-plot-2-markdown, echo=FALSE, eval=!tohtml, results='asis'}
 figpath <- "https://github.com/PietaSchofield/cprdwrangling/tree/main/README_files/figure-gfm"
-figfile <- file.path(figpath,"plotit_2_R.png")
+figfile <- file.path(figpath,"plotit_2_R-1.png")
 cat(paste0("\n\n![Dementia trends plot](",figfile,")\n\n"))
 ```
 
