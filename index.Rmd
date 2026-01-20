@@ -7,6 +7,8 @@ output:
     widescreen: true
     smaller: false
     highlight: zenburn
+  github_document:
+    toc: true
 ---
 
 ```{r setup_R, comment=NA, echo=F}
@@ -14,6 +16,7 @@ require(tidyverse)
 require(dbplyr)
 .locData <- file.path(Sys.getenv("HOME"),"Projects","demrfmr",".data")
 dbname <- file.path(.locData,"duckdb","demrisk.duckdb")
+tohtml <- knitr::is_html_output()
 ```
 
 # Motivation
@@ -126,7 +129,7 @@ rtrhd::load_table(dbf=dbname,dataset=coi,tab_name="coi_emis_dementia")
 
 <div style="font-size: 0.5em;">
 ```{r the-db_R, comment=NA,echo=F}
-if(knitr::is_html_output()){
+if(!tohtml){
   rtrhd::list_db(dbname) |> plibr::display_data(buttons=F)
 }else{
   rtrhd::list_db(dbname) |> knitr::kable(format="markdown")
@@ -174,7 +177,7 @@ DBI::dbDisconnect(dbcon)
 
 <div style="font-size: 0.5em;">
 ```{r ta-dah_2_R, comment=NA, echo=F}
-if(knitr::is_html_output()){
+if(!tohtml){
   dementia_trends |> head() |> mutate(patid="********") |> plibr::display_data(buttons=F)
 }else{
   dementia_trends |> head() |> mutate(patid="********") |> knitr::kable()
@@ -200,11 +203,11 @@ dementia_trends_plot <- dementia_trends %>%
 
 ## Uh oh!
 
-```{r plotit_R, comment=NA, echo=F, out.width="100%",warning=F,message=F}
+```{r plotit_R, comment=NA, echo=tohtml, out.width="100%",warning=F,message=F}
 print(dementia_trends_plot)
 ```
 
-```{r show-plot-markdown, echo=FALSE, eval=!knitr::is_html_output(), results='asis'}
+```{r show-plot-markdown, echo=FALSE, eval=!tohtml, results='asis'}
 figpath <- "https://github.com/PietaSchofield/cprdwrangling/tree/main/README_files/figure-gfm"
 figfile <- file.path(figpath,"plotit-R.png")
 cat(paste0("\n\n![Dementia trends plot](",figfile,")\n\n"))
@@ -281,14 +284,17 @@ dementia_trends_plot <- dementia_trends %>%
     y = "Density"
   ) +
   theme_minimal()
+```
+
+```{r plotit_2_R, comment=NA, echo=tohtml, out.width="100%",warning=F,message=F}
 print(dementia_trends_plot)
 ```
 </div>
 
 
-```{r show-plot-2-markdown, echo=FALSE, eval=!knitr::is_html_output(), results='asis'}
+```{r show-plot-2-markdown, echo=FALSE, eval=!tohtml, results='asis'}
 figpath <- "https://github.com/PietaSchofield/cprdwrangling/tree/main/README_files/figure-gfm"
-figfile <- file.path(figpath,"visualise_2_R.png")
+figfile <- file.path(figpath,"plotit_2_R.png")
 cat(paste0("\n\n![Dementia trends plot](",figfile,")\n\n"))
 ```
 
@@ -336,10 +342,11 @@ rmarkdown::render(
  input=file.path(Sys.getenv("HOME"),"GitLab","cprdwrangling","index.Rmd"),
  output_file=outfile
  )
-system2("xdg-open",args=outfile,wait=FALSE)
 rmarkdown::render(
  input=file.path(Sys.getenv("HOME"),"GitLab","cprdwrangling","index.Rmd"),
  output_format="github_document",
  output_file=readme
  )
+system2("xdg-open",args=outfile,wait=FALSE)
+system2("xdg-open",args=readme,wait=FALSE)
 ```

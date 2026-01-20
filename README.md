@@ -3,6 +3,41 @@ DuckDB and R for Data Analysis
 Dr Pietà-Georgina ‘Georgie’ Schofield
 2026-01-20
 
+- [Motivation](#motivation)
+  - [CPRD Aurum Data](#cprd-aurum-data)
+- [Problem](#problem)
+  - [Find Index Age Distribution by Dementia
+    Type](#find-index-age-distribution-by-dementia-type)
+- [A Solution](#a-solution)
+  - [`duckdb`, `tidyverse`, `DBI` and
+    `dbplyr`](#duckdb-tidyverse-dbi-and-dbplyr)
+- [Example ETL](#example-etl)
+  - [Extract](#extract)
+  - [Load](#load)
+  - [Have a cup of coffee (go for
+    lunch)](#have-a-cup-of-coffee-go-for-lunch)
+  - [Add the Code-list](#add-the-code-list)
+  - [The Database](#the-database)
+- [What Happened to T(ransform)](#what-happened-to-transform)
+  - [Data Quality Issues](#data-quality-issues)
+- [Example](#example)
+  - [`dbplyr`](#dbplyr)
+  - [`tibble`](#tibble)
+  - [`ggplot2`](#ggplot2)
+  - [Uh oh!](#uh-oh)
+- [This is “Lazy Evaluation” </br></br>Spoiler Alert: chain `dbplyr`
+  then
+  collect()](#this-is-lazy-evaluation-spoiler-alert-chain-dbplyr-then-collect)
+  - [Step 1.](#step-1)
+  - [Step 2.](#step-2)
+  - [Step 3.](#step-3)
+  - [Replot](#replot)
+- [Discussion](#discussion)
+  - [What This Talk Was Not](#what-this-talk-was-not)
+  - [What This Talk Was](#what-this-talk-was)
+  - [Take Home Message](#take-home-message)
+- [Thank You (pietas@liverpool.ac.uk)](#thank-you-pietasliverpoolacuk)
+
 # Motivation
 
 ## CPRD Aurum Data
@@ -131,7 +166,17 @@ rtrhd::load_table(dbf=dbname,dataset=coi,tab_name="coi_emis_dementia")
 
 <div style="font-size: 0.5em;">
 
-![](/home/pietas/GitLab/cprdwrangling/README_files/figure-gfm/the-db_R-1.png)<!-- -->
+| tablename | fields | records |
+|:---|:---|---:|
+| coi_emis_dementia | medcodeid, snomedctconceptid, preferred_term, proposed_group, n_synonyms | 671 |
+| emis_consultation | patid, consid, pracid, consdate, enterdate, staffid, conssourceid, cprdconstype, consmedcodeid | 120456179 |
+| emis_drugissue | patid, issueid, pracid, probobsid, drugrecid, issuedate, enterdate, staffid, prodcodeid, dosageid, quantity, quantunitid, duration, estnhscost | 197222175 |
+| emis_observation | patid, consid, pracid, obsid, obsdate, enterdate, staffid, parentobsid, medcodeid, value, numunitid, obstypeid, numrangelow, numrangehigh, probobsid | 425006899 |
+| emis_patient | patid, pracid, usualgpstaffid, gender, yob, mob, emis_ddate, regstartdate, patienttypeid, regenddate, acceptable, cprd_ddate | 249961 |
+| emis_practice | pracid, lcd, uts, region | 1483 |
+| emis_problem | patid, obsid, pracid, parentprobobsid, probenddate, expduration, lastrevdate, lastrevstaffid, parentprobrelid, probstatusid, signid | 14501709 |
+| emis_referral | patid, obsid, pracid, refsourceorgid, reftargetorgid, refurgencyid, refservicetypeid, refmodeid | 2826888 |
+| emis_staff | staffid, pracid, jobcatid | 1336287 |
 
 </div>
 
@@ -177,7 +222,14 @@ DBI::dbDisconnect(dbcon)
 
 <div style="font-size: 0.5em;">
 
-![](/home/pietas/GitLab/cprdwrangling/README_files/figure-gfm/ta-dah_2_R-1.png)<!-- -->
+| patid | proposed_group | index_date | yob | gender | regstartdate | index_year | index_age |
+|:---|:---|:---|---:|---:|:---|---:|---:|
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2018-02-01 | 1930 | 2 | 2000-09-02 | 2018 | 88 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2017-11-07 | 1924 | 2 | 1999-10-01 | 2017 | 93 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2023-03-17 | 1952 | 2 | 2017-11-28 | 2023 | 71 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2023-01-12 | 1932 | 2 | 1999-09-24 | 2023 | 91 |
+| \*\*\*\*\*\*\*\* | Alzheimera??s | 2024-07-18 | 1934 | 1 | 2001-08-06 | 2024 | 90 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2024-09-04 | 1966 | 2 | 2000-12-19 | 2024 | 58 |
 
 </div>
 
@@ -200,6 +252,10 @@ dementia_trends_plot <- dementia_trends %>%
 </div>
 
 ## Uh oh!
+
+``` r
+print(dementia_trends_plot)
+```
 
 <img src="/home/pietas/GitLab/cprdwrangling/README_files/figure-gfm/plotit_R-1.png" alt="" width="100%" />
 
@@ -271,7 +327,11 @@ DBI::dbDisconnect(dbcon)
 
 <div style="font-size: 0.8em;">
 
-<img src="/home/pietas/GitLab/cprdwrangling/README_files/figure-gfm/visualise_2_R-1.png" alt="" width="100%" />
+``` r
+print(dementia_trends_plot)
+```
+
+<img src="/home/pietas/GitLab/cprdwrangling/README_files/figure-gfm/plotit_2_R-1.png" alt="" width="100%" />
 
 </div>
 
