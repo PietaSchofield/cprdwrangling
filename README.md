@@ -226,16 +226,16 @@ DBI::dbDisconnect(dbcon)
 
 | patid | proposed_group | index_date | yob | gender | regstartdate | index_year | index_age |
 |:---|:---|:---|---:|---:|:---|---:|---:|
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2019-02-06 | 1949 | 2 | 1993-05-05 | 2019 | 70 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2015-06-02 | 1933 | 1 | 1996-05-01 | 2015 | 82 |
-| \*\*\*\*\*\*\*\* | Alzheimera??s | 2025-06-13 | 1941 | 1 | 1999-10-01 | 2025 | 84 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2024-09-17 | 1964 | 2 | 1996-05-01 | 2024 | 60 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2020-07-23 | 1931 | 2 | 1994-04-16 | 2020 | 89 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2016-03-01 | 1950 | 1 | 2003-03-19 | 2016 | 66 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2014-10-09 | 1945 | 2 | 2008-09-10 | 2014 | 69 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2021-05-24 | 1960 | 2 | 2008-07-03 | 2021 | 61 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2015-07-07 | 1926 | 2 | 1991-09-04 | 2015 | 89 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2016-11-23 | 1949 | 2 | 1991-09-04 | 2016 | 67 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2024-02-26 | 1957 | 2 | 1999-04-07 | 2024 | 67 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2019-03-13 | 1952 | 2 | 1953-11-03 | 2019 | 67 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2015-12-30 | 1935 | 2 | 1984-04-30 | 2015 | 80 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2016-01-12 | 1931 | 1 | 2006-11-17 | 2016 | 85 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2018-09-24 | 1958 | 1 | 1996-10-16 | 2018 | 60 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2014-01-21 | 1974 | 1 | 2009-01-07 | 2014 | 40 |
+| \*\*\*\*\*\*\*\* | Alzheimera??s | 2023-08-17 | 1939 | 2 | 1964-09-25 | 2023 | 84 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2019-11-29 | 1936 | 1 | 1955-10-29 | 2019 | 83 |
+| \*\*\*\*\*\*\*\* | Vascular | 2018-05-04 | 1940 | 2 | 1983-03-31 | 2018 | 78 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 2022-09-20 | 1939 | 1 | 1983-03-31 | 2022 | 83 |
 
 ## `ggplot2`
 
@@ -256,12 +256,6 @@ dementia_trends_plot <- dementia_trends %>%
 </div>
 
 ## Uh oh!
-
-``` r
-tohtml
-```
-
-    ## [1] FALSE
 
 <figure>
 <img

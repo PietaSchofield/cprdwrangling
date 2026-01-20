@@ -18,7 +18,7 @@ require(dbplyr)
 dbname <- file.path(.locData,"duckdb","demrisk.duckdb")
 #
 # NB Horrible kludge but set this TRUE if rendering ioslides and FALSE if rendering github_document
-tohtml <- FALSE
+tohtml <- TRUE
 ```
 
 # Motivation
@@ -204,10 +204,6 @@ dementia_trends_plot <- dementia_trends %>%
 </div>
 
 ## Uh oh!
-
-```{r db_1}
-tohtml
-```
 
 ```{r plotit_R, comment=NA, eval=tohtml,echo=F, out.width="100%",warning=F,message=F}
 print(dementia_trends_plot)
