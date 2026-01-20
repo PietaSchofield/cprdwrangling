@@ -129,7 +129,7 @@ rtrhd::load_table(dbf=dbname,dataset=coi,tab_name="coi_emis_dementia")
 if(knitr::is_html_output()){
   rtrhd::list_db(dbname) |> plibr::display_data(buttons=F)
 }else{
-  rtrhd::list_db(dbname) |> knitr::kable()
+  rtrhd::list_db(dbname) |> knitr::kable(format="markdown")
 }
 ```
 </div>
@@ -202,6 +202,12 @@ dementia_trends_plot <- dementia_trends %>%
 
 ```{r plotit_R, comment=NA, echo=F, out.width="100%",warning=F,message=F}
 print(dementia_trends_plot)
+```
+
+```{r show-plot-markdown, echo=FALSE, eval=!knitr::is_html_output(), results='asis'}
+figpath <- "https://github.com/PietaSchofield/cprdwrangling/tree/main/README_files/figure-gfm"
+figfile <- file.path(figpath,"plotit-R.png")
+cat(paste0("\n\n![Dementia trends plot](",figfile,")\n\n"))
 ```
 
 # This is "Lazy Evaluation" </br></br>Spoiler Alert: chain `dbplyr` then collect()
@@ -278,6 +284,13 @@ dementia_trends_plot <- dementia_trends %>%
 print(dementia_trends_plot)
 ```
 </div>
+
+
+```{r show-plot-2-markdown, echo=FALSE, eval=!knitr::is_html_output(), results='asis'}
+figpath <- "https://github.com/PietaSchofield/cprdwrangling/tree/main/README_files/figure-gfm"
+figfile <- file.path(figpath,"visualise_2_R.png")
+cat(paste0("\n\n![Dementia trends plot](",figfile,")\n\n"))
+```
 
 # Discussion
 
