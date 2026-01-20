@@ -69,7 +69,7 @@ tohtml <- FALSE
 - Well I have done that and you have your 9 zipped files (13GB)
 - Copy them from CPRDGeneralinfo drive to a University asset you have read/write access to
    - options university desktop / laptop / active data storage network drive (preferable)
-   - __do not cope to unencrypted non_password protected devices (eg. penstick, personal laptops)__
+   - __do not copy to unencrypted non_password protected devices (eg. penstick, personal laptops)__
 - Unzip the compressed files into the 93 tab delimited text files (82GB)
 
 ## Load
@@ -108,7 +108,7 @@ INFO [2026-01-16 17:17:52] emis_problem: 14501709 records loaded from 1 file(s) 
 INFO [2026-01-16 17:27:34] emis_drugissue: 197222175 records loaded from 35 file(s) </br>
 \>
 </div>
-- 18GB duckdb file created
+- 18GB duckdb file created (you can delete the 83GB of text files now)
 - 761,601,581 records ingested in 1978 seconds (~33 minutes)
 - Still think you need a database server?
 

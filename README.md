@@ -94,7 +94,7 @@ Dr Pietà-Georgina ‘Georgie’ Schofield
   read/write access to
   - options university desktop / laptop / active data storage network
     drive (preferable)
-  - **do not cope to unencrypted non_password protected devices (eg.
+  - **do not copy to unencrypted non_password protected devices (eg.
     penstick, personal laptops)**
 - Unzip the compressed files into the 93 tab delimited text files (82GB)
 
@@ -142,7 +142,7 @@ records loaded from 35 file(s) </br> \>
 
 </div>
 
-- 18GB duckdb file created
+- 18GB duckdb file created (you can delete the 83GB of text files now)
 - 761,601,581 records ingested in 1978 seconds (~33 minutes)
 - Still think you need a database server?
 
@@ -228,16 +228,16 @@ DBI::dbDisconnect(dbcon)
 
 | patid            | proposed_group             |  yob | gender | index_year | index_age |
 |:-----------------|:---------------------------|-----:|-------:|-----------:|----------:|
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1948 |      2 |       2014 |        66 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1943 |      1 |       2016 |        73 |
-| \*\*\*\*\*\*\*\* | Vascular                   | 1933 |      1 |       2019 |        86 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1940 |      2 |       2018 |        78 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1946 |      1 |       2017 |        71 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1941 |      1 |       2014 |        73 |
-| \*\*\*\*\*\*\*\* | Alzheimera??s              | 1936 |      1 |       2017 |        81 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1954 |      1 |       2018 |        64 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1948 |      2 |       2021 |        73 |
-| \*\*\*\*\*\*\*\* | Vascular                   | 1952 |      1 |       2024 |        72 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1949 |      2 |       2016 |        67 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1945 |      1 |       2016 |        71 |
+| \*\*\*\*\*\*\*\* | Alzheimera??s              | 1934 |      2 |       2019 |        85 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1947 |      1 |       2017 |        70 |
+| \*\*\*\*\*\*\*\* | Alzheimera??s              | 1937 |      2 |       2020 |        83 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1932 |      2 |       2017 |        85 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1936 |      1 |       2014 |        78 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1969 |      1 |       2015 |        46 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1961 |      1 |       2015 |        54 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1939 |      2 |       2017 |        78 |
 
 ## `ggplot2`
 
