@@ -1,7 +1,7 @@
-DuckDB and R for Data Analysis
+DuckDB and R</br>for (CPRD)</br>Data Analysis
 ================
 Dr Pietà-Georgina ‘Georgie’ Schofield
-2026-01-20
+2026-01-21
 
 - [Motivation](#motivation)
   - [CPRD Aurum Data](#cprd-aurum-data)
@@ -25,25 +25,28 @@ Dr Pietà-Georgina ‘Georgie’ Schofield
   - [`tibble`](#tibble)
   - [`ggplot2`](#ggplot2)
   - [Uh oh!](#uh-oh)
-- [This is “Lazy Evaluation” </br></br>Spoiler Alert: chain `dbplyr`
-  then
-  collect()](#this-is-lazy-evaluation-spoiler-alert-chain-dbplyr-then-collect)
+- [This is “Lazy Evaluation” </br></br>chain `dbplyr` then
+  collect()](#this-is-lazy-evaluation-chain-dbplyr-then-collect)
   - [Step 1.](#step-1)
+  - [Step 1.](#step-1-1)
+  - [Warning](#warning)
   - [Step 2.](#step-2)
   - [Step 3.](#step-3)
+  - [Step 3.](#step-3-1)
   - [Replot](#replot)
 - [Discussion](#discussion)
   - [What This Talk Was Not](#what-this-talk-was-not)
   - [What This Talk Was](#what-this-talk-was)
   - [Take Home Message](#take-home-message)
-- [Thank You (pietas@liverpool.ac.uk)](#thank-you-pietasliverpoolacuk)
+- [Thank You
+  </br>pietas@liverpool.ac.uk</br>https://github.com/PietaSchofield](#thank-you-pietasliverpoolacukhttpsgithubcompietaschofield)
 
 # Motivation
 
 ## CPRD Aurum Data
 
 - 250000 dementia patient records from CPRD Aurum
-- 13GB of data in 7 compressed files (each ~2GB)
+- 13GB of data in 9 compressed files (each ~2GB)
 - Unzips to 82GB of data
   - patient: 249961 records in 1 file
   - practice: 1483 records in 1 file
@@ -89,7 +92,8 @@ Dr Pietà-Georgina ‘Georgie’ Schofield
 
 ## Extract
 
-- Well I have done that and you have your 9 zipped files (13GB)
+- “CPRD fob-holder” has done that and you now have your 9 zipped files
+  (13GB)
 - Copy them from CPRDGeneralinfo drive to a University asset you have
   read/write access to
   - options university desktop / laptop / active data storage network
@@ -100,29 +104,25 @@ Dr Pietà-Georgina ‘Georgie’ Schofield
 
 ## Load
 
-- Download my `rtrhd` R package (GitHub) (NB. It has a lot of irrelevant
-  functions)
-- get a copy of the CPRD Aurum data-dictionary file from CPRDGeneralinfo
-  drive
-- Then run this
-
-<div style="font-size: 0.8em;">
+- Install the `rtrhd` R package (GitHub)
 
 ``` r
-# You will need the location of your files here so I have just put variables
-rtrhd::load_with_data_dictionary(
-  ddFile=ddfile, # Variable holding location of data-
-                 # dictionary file
-  dbf=dbname, # Variable holding location of duckdb database file 
-              # to be created
-  datadir=ddir, # Variable pointing to parent directory where the
-                # text files were unzipped to
-  dset=dset # Variable prefix for database tables to be created
-            # eg. emis or aurum or gold
-)
+install.packages("remotes")
+remotes::install_github("PietaSchofield/rtrhd")
 ```
 
-</div>
+- Get a copy of the CPRD Aurum/EMIS data-dictionary file from
+  CPRDGeneralinfo drive
+- Then run load_with_data_dictionary (works for EMIS, GOLD, HES, ONS…)
+
+``` r
+rtrhd::load_with_data_dictionary(
+  ddFile=file.path(...), # location of data dictionary file
+  dbf=file.path(...), # location of duckdb database file to be created
+  datadir=file.path(...), # location the text files that were unzipped 
+  dset="..." # a prefix for tablenames eg. 'emis' or 'aurum' or 'gold'
+)
+```
 
 ## Have a cup of coffee (go for lunch)
 
@@ -148,8 +148,6 @@ records loaded from 35 file(s) </br> \>
 
 ## Add the Code-list
 
-<div style="font-size: 0.8em;">
-
 ``` r
 coi <- file.path(.projLoc,"dementia_codes.xlsx") |>
   readxl::read_excel(col_type="text") |>
@@ -159,14 +157,17 @@ coi <- file.path(.projLoc,"dementia_codes.xlsx") |>
     proposed_group=iconv(proposed_group, 
                          from="UTF-8", to="ASCII//TRANSLIT")
  ) 
-rtrhd::load_table(dbf=dbname,dataset=coi,tab_name="coi_emis_dementia")
-```
 
-</div>
+rtrhd::load_table(dbf=dbname,dataset=coi,tab_name="coi_emis_dementia")
+
+rtrhd::list_db(dbname)
+```
 
 ## The Database
 
 <div style="font-size: 0.5em;">
+
+</div>
 
 | tablename | fields | records |
 |:---|:---|---:|
@@ -180,14 +181,16 @@ rtrhd::load_table(dbf=dbname,dataset=coi,tab_name="coi_emis_dementia")
 | emis_referral | patid, obsid, pracid, refsourceorgid, reftargetorgid, refurgencyid, refservicetypeid, refmodeid | 2826888 |
 | emis_staff | staffid, pracid, jobcatid | 1336287 |
 
-</div>
-
 # What Happened to T(ransform)
 
 ## Data Quality Issues
 
-- There will be lots of data quality issues you need to understand. (It
-  is routinely collected healthcare data!)
+- There will be lots of data quality issues you need to understand.
+- It is routinely collected healthcare data afterall
+- Data quality filters such practice
+  - Up To Standard Date (uts) (but this is not currently supplied, false
+    confidence?)
+  - Last Collected Date (lcd)
 - These are much better understood if
   - You can easily explore your data
   - You can run many look-see queries
@@ -196,8 +199,6 @@ rtrhd::load_table(dbf=dbname,dataset=coi,tab_name="coi_emis_dementia")
 # Example
 
 ## `dbplyr`
-
-<div style="font-size: 0.8em;">
 
 ``` r
 # connect to the database
@@ -218,8 +219,6 @@ dementia_trends <- tbl(dbcon,"emis_observation") |>
 DBI::dbDisconnect(dbcon)
 ```
 
-</div>
-
 ## `tibble`
 
 <div style="font-size: 0.5em;">
@@ -228,20 +227,18 @@ DBI::dbDisconnect(dbcon)
 
 | patid            | proposed_group             |  yob | gender | index_year | index_age |
 |:-----------------|:---------------------------|-----:|-------:|-----------:|----------:|
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1949 |      2 |       2016 |        67 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1945 |      1 |       2016 |        71 |
-| \*\*\*\*\*\*\*\* | Alzheimera??s              | 1934 |      2 |       2019 |        85 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1947 |      1 |       2017 |        70 |
-| \*\*\*\*\*\*\*\* | Alzheimera??s              | 1937 |      2 |       2020 |        83 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1932 |      2 |       2017 |        85 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1936 |      1 |       2014 |        78 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1969 |      1 |       2015 |        46 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1961 |      1 |       2015 |        54 |
-| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1939 |      2 |       2017 |        78 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1956 |      2 |       2024 |        68 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1966 |      2 |       2018 |        52 |
+| \*\*\*\*\*\*\*\* | Vascular                   | 1961 |      2 |       2025 |        64 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1949 |      2 |       2024 |        75 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1948 |      1 |       2017 |        69 |
+| \*\*\*\*\*\*\*\* | Other/Check                | 1947 |      1 |       2023 |        76 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1956 |      1 |       2018 |        62 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1936 |      2 |       2018 |        82 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1946 |      2 |       2020 |        74 |
+| \*\*\*\*\*\*\*\* | Unspecified/Other dementia | 1942 |      2 |       2014 |        72 |
 
 ## `ggplot2`
-
-<div style="font-size: 0.8em;">
 
 ``` r
 dementia_trends_plot <- dementia_trends %>%
@@ -255,8 +252,6 @@ dementia_trends_plot <- dementia_trends %>%
   theme_minimal()
 ```
 
-</div>
-
 ## Uh oh!
 
 <figure>
@@ -266,75 +261,106 @@ alt="Dementia trends plot" />
 <figcaption aria-hidden="true">Dementia trends plot</figcaption>
 </figure>
 
-# This is “Lazy Evaluation” </br></br>Spoiler Alert: chain `dbplyr` then collect()
+# This is “Lazy Evaluation” </br></br>chain `dbplyr` then collect()
 
 ## Step 1.
 
-<div style="font-size: 0.8em;">
-
 ``` r
 dbcon <- DBI::dbConnect(duckdb::duckdb(), dbname, read_only=T)
-
 dementia_trends <- tbl(dbcon, "emis_observation") |>
-  inner_join(tbl(dbcon, "emis_patient") |>
-    select(patid, yob, gender, regstartdate, regenddate), 
-    by = "patid") |>
-  # Filter early in DuckDB - much more efficient
-  filter(
-    obsdate >= regstartdate,
-    # Use today's date or end of data
-    obsdate <= coalesce(regenddate, as.Date('2024-12-31'))
-  ) 
+  inner_join(tbl(dbcon, "coi_emis_dementia"), by = "medcodeid") |>
+  inner_join(tbl(dbcon, "emis_patient"), by = c("patid","pracid")) |>
+  transmute(patid,pracid,yob,sex=gender,regstart=regstartdate,regend=regenddate,
+            obsid,obsdate,enterdate,medcodeid,dementia_type=proposed_group)
 ```
 
+## Step 1.
+
+<div style="font-size: 0.8em; white-space: pre; overflow-x: auto;">
+
+\> is(dementia_trends)  
+\[1\] “tbl_duckdb_connection”  
+\> dementia_trends \|\>
+mutate(patid=“\*\*\*\*”,regstart=“\*\*\*\*”,regend=“\*\*\*\*\*”) \|\>
+head()  
+\# Source: SQL \[?? x 11\]  
+\# Database: DuckDB 1.4.3 <user@Linux> 6.18.4-1-MANJARO:R
+4.5.2//home/user/Projects/demrfmr/.data/duckdb/demrisk.duckdb  
+patid pracid yob sex regstart regend obsid obsdate enterdate medcodeid
+dementia_type  
+\<chr\> \<int\> \<int\> \<int\> \<chr\> \<chr\> \<chr\> \<date\>
+\<date\> \<chr\> \<chr\>  
+1 \*\*\*\* 20002 1970 1 \*\*\*\* \*\*\*\*\* 17757124480 2022-11-03
+2022-11-03 1867041000006112 Unspecified/Other dementia  
+2 \*\*\*\* 20002 1958 1 \*\*\*\* \*\*\*\*\* 1158071968 2014-11-27
+2014-11-27 1867041000006112 Unspecified/Other dementia  
+3 \*\*\*\* 20002 1961 1 \*\*\*\* \*\*\*\*\* 23115694179 2024-06-17
+2024-06-17 1867041000006112 Unspecified/Other dementia  
+4 \*\*\*\* 20002 1940 2 \*\*\*\* \*\*\*\*\* 10295072833 2020-03-10
+2020-03-10 1150521000000117 Unspecified/Other dementia  
+5 \*\*\*\* 20002 1929 2 \*\*\*\* \*\*\*\*\* 7348443459 2019-06-07
+2019-06-18 45046017 Alzheimera??s  
+6 \*\*\*\* 20002 1920 2 \*\*\*\* \*\*\*\*\* 1161784698 2017-01-13
+2017-01-13 2345931000000111 Unspecified/Other dementia  
+\> dementia_trends \|\> tally()  
+\# Source: SQL \[?? x 1\]  
+\# Database: DuckDB 1.4.3 <user@Linux> 6.18.4-1-MANJARO:R
+4.5.2//home/user/Projects/demrfmr/.data/duckdb/demrisk.duckdb  
+n  
+\<dbl\>  
+1 787996
+
 </div>
+
+## Warning
+
+- Many R display/formatting functions will **silently trigger
+  `collect()`** on lazy queries:
+- For example will all trigger collect() and potentially crash R:
+  - kable(huge_lazy_query) \# knitr::kable()
+  - DT::datatable(huge_lazy_query) \# DT package
+  - print(huge_lazy_query) \# sometimes, depending on print method
+  - View(huge_lazy_query) \# RStudio viewer
 
 ## Step 2.
 
-<div style="font-size: 0.8em;">
-
 ``` r
 dementia_trends <- dementia_trends |>
-  inner_join(tbl(dbcon, "coi_emis_dementia"), by = "medcodeid") %>%
-  group_by(patid, proposed_group) %>% 
-  window_order(obsdate) %>%
+  inner_join(tbl(dbcon, "emis_practice") |> transmute(pracid, lcd), 
+    by= "pracid") |>
+  filter(
+    obsdate >= regstart,
+    obsdate <= coalesce(lcd,coalesce(regend, as.Date('2024-12-31')))
+  ) |> 
+  group_by(patid, sex, yob, dementia_type) |>
+  window_order(obsdate) |>
   summarise(
     index_date = first(obsdate),
     .groups = "drop"
-  ) %>%
-  inner_join(tbl(dbcon, "emis_patient") %>% 
-    transmute(patid, yob, gender, regstartdate), 
-    by = "patid") 
+  ) 
 ```
 
-</div>
-
 ## Step 3.
-
-<div style="font-size: 0.8em;">
 
 ``` r
 dementia_trends <- dementia_trends |>
   mutate(
     index_year = year(index_date),
     index_age = index_year - yob
-  ) %>%
+  ) |>
   # Additional quality filters in DuckDB
   filter(
-    index_age >= 18,
+    index_age >= 0,
     index_age <= 110
-  ) %>%
-  collect()
+  ) |>
+  collect() |>
+  mutate( dementia_type = gsub("a\\?\\?","'",dementia_type))
 DBI::dbDisconnect(dbcon)
 ```
 
-</div>
+## Step 3.
 
 ## Replot
-
-<div style="font-size: 0.8em;">
-
-</div>
 
 <figure>
 <img
@@ -347,28 +373,28 @@ alt="Dementia trends plot" />
 
 ## What This Talk Was Not
 
-- This wasn’t a talk about how to clean your data
+- This wasn’t a talk about how to clean your data e.g. dodgy dates
+- **Answer: DEPENDS ON YOUR RESEARCH QUESTION**
+  - Prevalence study? → Maybe keep patient, drop bad record
+  - Disease progression study? → Whole patient sequence compromised
+  - Healthcare utilization? → Registration period matters more
 - An exhaustive tutorial on R, `tidyverse`, `dbplyr` or `duckdb`
 - Dissing `data.tables` or `python` or `sql` any other tool/language
 
 ## What This Talk Was
 
-- To show the potential of `duckdb` and `dbplyr`
+- To show the potential of `duckdb`, `tidyverse` and `dbplyr`
+  - for efficient data exploration
+  - for effective data visualisation
 - “This talk was brought to you by…”
-  <div style="font-size: 0.8em;">
-
-  </div>
 
 ``` r
 # CRAN packages
 install.packages(c("duckdb","tidyverse","dbplyr","remotes","rmarkdown"))
 
-# My R Tools for Routine Healthcare Data (rtrhd) package 
-# (and its dependencies)
+# My R Tools for Routine Healthcare Data (rtrhd) package
 remotes::install_github("PietaSchofield/rtrhd")
 ```
-
-</div>
 
 - **WARNING on Manjaro Linux duckdb takes AGES!! to install** … no
   **really** go for dinner, watch a movie contemplate, life choices
@@ -384,4 +410,4 @@ remotes::install_github("PietaSchofield/rtrhd")
   - drawing two ggplots
   - **\< 15 seconds**
 
-# Thank You (<pietas@liverpool.ac.uk>)
+# Thank You </br><pietas@liverpool.ac.uk></br><https://github.com/PietaSchofield>
