@@ -1,0 +1,9 @@
+project_name: CPRDWRANGLING
+description: Presentation on using duckdb and dbplyr in R for CPRD analysis
+status: active
+start_date: 2025-06-27 00:00:00
+last_updated: 2026-01-28 10:43:17
+owner: Pietà Schofield
+contact: Pietà Schofield
+web_status: exists
+

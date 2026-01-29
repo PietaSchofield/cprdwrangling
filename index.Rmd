@@ -18,7 +18,7 @@ require(dbplyr)
 dbname <- file.path(.locData,"duckdb","demrisk.duckdb")
 #
 # NB Horrible kludge but set this TRUE if rendering ioslides and FALSE if rendering github_document
-tohtml <- FALSE
+tohtml <- TRUE
 ```
 
 # Motivation
@@ -83,7 +83,7 @@ remotes::install_github("PietaSchofield/rtrhd")
 - Then run load_with_data_dictionary (works for EMIS, GOLD, HES, ONS...)
 ```{r load_R, comment=NA, eval=F}
 rtrhd::load_with_data_dictionary(
-  ddFile=file.path(...), # location of data dictionary file
+  ddFile=system.file("cprd","aurum_emis_dd.xlsx",package="rtrhd"),
   dbf=file.path(...), # location of duckdb database file to be created
   datadir=file.path(...), # location the text files that were unzipped 
   dset="..." # a prefix for tablenames eg. 'emis' or 'aurum' or 'gold'
@@ -201,9 +201,9 @@ dementia_trends_plot <- dementia_trends %>%
   theme_minimal()
 ```
 
-## Uh oh!
+## What is wrong with this picture! 
 
-```{r plotit_R, comment=NA, eval=tohtml,echo=F, out.width="100%",warning=F,message=F}
+```{r plotit_R, comment=NA, eval=tohtml,echo=F, out.width="100%",warning=F,message=F,fig.height=4}
 print(dementia_trends_plot)
 ```
 
@@ -317,7 +317,7 @@ dementia_trends_plot <- dementia_trends %>%
   theme_minimal()
 ```
 
-```{r plotit_2_R, comment=NA, echo=FALSE, eval=tohtml, out.width="100%",warning=F,message=F}
+```{r plotit_2_R, comment=NA, echo=FALSE, eval=tohtml, out.width="100%",warning=F,message=F,fig.height=4}
 print(dementia_trends_plot)
 ```
 
@@ -357,11 +357,12 @@ remotes::install_github("PietaSchofield/rtrhd")
 
 ## Take Home Message
 
-- I loaded the data it took 33 minutes
+- 3/4 Billion rows of data loaded in 33 minutes.
+- Fast out of memory aggregation _Lazy evaluation_
 - To render these slides using `rmarkdown::render`
     - live from the database
     - counting rows in each of 9 tables
-    - queries processing 425Million records twice
+    - queries processing > 425Million records (twice)
     - drawing two ggplots
     - __< 15 seconds__
 
@@ -373,10 +374,16 @@ remotes::install_github("PietaSchofield/rtrhd")
 #
 outfile <- file.path("/srv","http","uol","tutorials","cprdwrangling.html")
 rmarkdown::render(
- input=file.path(Sys.getenv("HOME"),"GitLab","cprdwrangling","index.Rmd"),
+ input=file.path(Sys.getenv("HOME"),"GitLab","github","cprdwrangling","index.Rmd"),
  output_file=outfile
  )
 system2("xdg-open",args=outfile,wait=FALSE)
+outfile <- file.path("/srv","http","uol","cprdwrangling","index.html")
+dir.create(dirname(outfile), showW=F)
+rmarkdown::render(
+ input=file.path(Sys.getenv("HOME"),"GitLab","github","cprdwrangling","index.Rmd"),
+ output_file=outfile
+ )
 ```
 
 ```{r build-it_github, comment=NA,eval=F,echo=F}
